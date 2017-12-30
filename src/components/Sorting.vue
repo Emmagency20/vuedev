@@ -48,7 +48,6 @@
 				<span class="col-sm-4">
 					<input v-model="tel" class="form-control input-sm" type="tel" @keyup="toTel">
 				</span>
-				<span class="col-sm-1"><h5>{{ tel}}</h5></span>
 			</div>
 		</div>
 		<div class="row">
@@ -61,6 +60,18 @@
 					<input v-model.number="num2" class="form-control input-sm" type="number">
 					<input v-model.number="num3" class="form-control input-sm" type="number">
 					<input v-model.number="sum" class="form-control input-sm" type="number">
+				</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<h3>
+					Move bish
+				</h3>
+				<span class="col-sm-4">
+					<input class="form-control input-sm" type="text" @keyup="changeFocus" maxlength="5" v-model="txt1">
+					<input class="form-control input-sm" type="text" v-model="txt2" ref="txt2" @keyup="changeFocus" maxlength="5">
+					<input class="form-control input-sm" type="text" ref="txt3">
 				</span>
 			</div>
 		</div>
@@ -88,7 +99,9 @@
 			num1: '',
 			num2: '',
 			num3: '',
-			num4: ''
+			num4: '',
+			txt1:'',
+			txt2: ''
 			}
 		},
 
@@ -130,10 +143,17 @@
       			return !isNaN(parseFloat(price)) && isFinite(price);
       		},
       		toUSD: function() {
-				this.price = this.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+				this.price = this.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/, "$1,");
 			},
 			toTel: function() {
 				this.tel = this.tel.toString().replace(/([0])(\d{3})(\d{3})(\d{4})/, "(234) $2-$3-$4");
+			},
+			changeFocus: function () {
+				if (this.txt1.length >= 5) {
+					this.$refs.txt2.focus();
+				} if (this.txt2.length >= 5) {
+					this.$refs.txt3.focus();
+				}
 			}
 		}
 
