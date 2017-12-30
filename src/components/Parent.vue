@@ -28,7 +28,8 @@
   				this.$store.commit('changeMessage', {
   					message: this.message
   				});
-  				this.show = true
+  				this.show = true;
+  				this.oldMessage = this.message
   			}
   		}
 	}
